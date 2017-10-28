@@ -1,18 +1,32 @@
 {
-  "name": "listen-with-me",
+  "name": "sdk-starter-node",
   "version": "1.0.0",
-  "description": "Collaborative music listening",
+  "description": "Starter Server Application for Node.js",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "NODE_ENV=test && ./node_modules/.bin/jest"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QasimAbbas/ListenWithMe.git"
+    "url": "git+https://github.com/TwilioDevEd/sdk-starter-node.git"
   },
-  "homepage": "https://github.com/QasimAbbas/ListenWithMe",
+  "author": "Twilio Developer Education",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TwilioDevEd/sdk-starter-node/issues"
+  },
+  "homepage": "https://github.com/TwilioDevEd/sdk-starter-node#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "dotenv": "^2.0.0",
+    "camelcase": "^4.1.0",
     "express": "^4.15.3",
     "pug": "^2.0.0-rc.2",
     "twilio": "3.9.0"
+  },
+  "devDependencies": {
+    "jest": "^19.0.2",
+    "jsonwebtoken": "^7.4.0"
   }
 }

@@ -1,37 +1,32 @@
-const express = require("express");
-const http = require("http");
-const path = require("path");
-const dotenv = require("dotenv");
-const twilio = require("twilio");
+require('dotenv').load();
 
-const staticdir = path.join(__dirname, "static");
+// Node/Express
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+const router = require('./src/router');
+const syncServiceDetails = require('./src/sync_service_details');
+
+// Create Express webapp
+const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Add body parser for Notify device registration
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.use(router);
+
+// Get Sync Service Details for lazy creation of default service if needed
+syncServiceDetails();
+
+// Create http server and run it
+const server = http.createServer(app);
 const port = process.env.PORT || 3000;
+server.listen(port, function() {
+  console.log('Express server running on *:' + port);
+});
 
-function init() {
-    dotenv.load();
-
-    let app = express();
-    app.use( express.static(staticdir) );
-
-
-    let server = http.createServer(app);
-    server.listen(port, function () {
-        console.log("Running on :" + port);
-    });
-
-    let client = new twilio(
-        process.env.TWILIO_API_KEY,
-        process.env.TWILIO_API_SECRET,
-        {accountSid: process.env.TWILIO_ACCOUNT_SID}
-    );
-    client.sync
-        .services( process.env.TWILIO_SYNC_SERVICE_SID || 'default' )
-        .fetch()
-        .then( response => {
-            console.log(response);
-        });
-}
-
-if ( require.main  === module ) {
-    init();
-}
+module.exports = app;
