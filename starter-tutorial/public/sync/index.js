@@ -49,6 +49,7 @@ $(function () {
       if (data.board) {
         updateUserInterface(data);
       }
+      
 
       //Let's subscribe to changes on this document, so when something
       //changes on this document, we can trigger our UI to update
@@ -78,9 +79,10 @@ $(function () {
 
     if (cellValue === 'X') {
       $cell.html('O');
-      ap.play();
+     // ap.play();
     } else if (cellValue === 'O') {
       $cell.html('&nbsp;');
+      ap.pause();
     } else {
       $cell.html('X');
     }
@@ -107,6 +109,7 @@ $(function () {
 
   //Update the buttons on the board to match our document
   function updateUserInterface(data) {
+    ap.play();
     for (var row = 0; row < 3; row++) {
       for (var col = 0; col < 3; col++) {
         var selector = '[data-row="' + row + '"]' +
