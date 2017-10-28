@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/TwilioDevEd/sdk-starter-node#readme",
   "dependencies": {
+    "aplayer": "^1.6.0",
     "body-parser": "^1.17.2",
     "camelcase": "^4.1.0",
     "dotenv": "^2.0.0",

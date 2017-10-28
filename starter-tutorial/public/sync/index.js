@@ -1,10 +1,5 @@
 $(function () {
 
- // var Mplayer = require("mplayer");
-  //var player = new MPlayer();
- // var Player = require('player');
- // var player = new Player('nyan.mp3');
-
   //We'll use message to tell the user what's happening
   var $message = $('#message');
     
@@ -17,6 +12,15 @@ $(function () {
   //We're going to use a single Sync document, our simplest
   //synchronisation primitive, for this demo
   var syncDoc;
+
+  var ap = new APlayer({
+       element: document.getElementById('player'),
+       music: {
+            title: 'Hello World',
+            author: 'A scrub',
+            url: 'nyan.mp3'
+        }
+    });
 
   //Get an access token for the current user, passing a device ID
   //In browser-based apps, every tab is like its own unique device
@@ -31,8 +35,9 @@ $(function () {
 
     //Now that Sync is active, lets enable our game board
     $buttons.attr('disabled', false);
-  //  player.openFile('nyan.mp3');
+   
     
+
     //This code will create and/or open a Sync document
     //Note the use of promises
     syncClient.document('SyncGame').then(function(doc) {
@@ -72,10 +77,9 @@ $(function () {
     var cellValue = $cell.html();
 
     if (cellValue === 'X') {
-     // player.play();
       $cell.html('O');
+      ap.play();
     } else if (cellValue === 'O') {
-      //player.stop;
       $cell.html('&nbsp;');
     } else {
       $cell.html('X');
