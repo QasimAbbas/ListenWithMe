@@ -2,8 +2,8 @@ $(function () {
 
  // var Mplayer = require("mplayer");
   //var player = new MPlayer();
-  var Player = require('player');
-  var player = new Player('nyan.mp3');
+ // var Player = require('player');
+ // var player = new Player('nyan.mp3');
 
   //We'll use message to tell the user what's happening
   var $message = $('#message');
@@ -72,10 +72,10 @@ $(function () {
     var cellValue = $cell.html();
 
     if (cellValue === 'X') {
-      player.play();
+     // player.play();
       $cell.html('O');
     } else if (cellValue === 'O') {
-      player.stop;
+      //player.stop;
       $cell.html('&nbsp;');
     } else {
       $cell.html('X');
