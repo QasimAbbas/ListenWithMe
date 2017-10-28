@@ -1,13 +1,23 @@
 $(function () {
   //We'll use message to tell the user what's happening
   var $message = $('#message');
-
+  
   //Get handle to the game board buttons
   //var $buttons = $('#board .board-row button');
 
   //Our interface to the Sync service
   var syncClient;
-
+  
+  var ap = new APlayer({
+      element: document.getElementById('player'),
+      music:{
+               title: 'A Scrubs Life',
+               author: 'Scrub',
+               url: 'nyan.mp3'
+      }
+  });
+  
+  
   //We're going to use a single Sync document, our simplest
   //synchronisation primitive, for this demo
   var syncDoc;
@@ -25,13 +35,14 @@ $(function () {
 
     //Now that Sync is active, lets enable our game board
     //$buttons.attr('disabled', false);
-
+    
     //This code will create and/or open a Sync document
     //Note the use of promises
-    syncClient.document('SyncSong').then(function(doc) {
+     syncClient.document('SyncSong').then(function(doc) {
       //Lets store it in our global variable
-      syncDoc = doc;
-
+     syncDoc = doc;
+     ap.toggle()
+                                          
       //Let's subscribe to changes on this document, so when something
       //changes on this document, we can trigger our UI to update
 
