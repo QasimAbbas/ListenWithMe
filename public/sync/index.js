@@ -11,9 +11,10 @@ $(function () {
                         preload: 'metadata',
                         mode: 'circulation',
                         music: {
-                        title: 'Preparation',
-                        author: 'Hans Zimmer/Richard Harvey',
+                        title: 'Something Like This',
+                        author: 'Chainsmokers',
                         url: 'nyan.mp3',
+						pic: 'img.jpg',
                         }
                         });
 
@@ -32,6 +33,8 @@ $(function () {
   //synchronisation primitive, for this demo
   var syncDoc;
   
+
+  
   //Get an access token for the current user, passing a device ID
   //In browser-based apps, every tab is like its own unique device
   //synchronizing state -- so we'll use a random UUID to identify
@@ -49,36 +52,40 @@ $(function () {
             //This code will create and/or open a Sync document
             //Note the use of promises
             syncClient.document('SyncSong').then(function(doc) {
+
                  //Lets store it in our global variable
                  syncDoc = doc;
                                                  
                  //Initialize game board UI to current state (if it exists)
                  var data = syncDoc.get();
-                 
+                 //Sets a flag to determine if music file is still playing or not.
+//				var isPlaying = false;
                  if(data){
                      updateUserInterface(data);
                      }
                                                  
                  //Let's subscribe to changes on this document, so when something
                  //changes on this document, we can trigger our UI to update
-                 syncDoc.on('updated', updateUserInterface);
-                                                 
+                 syncDoc.on('updated', updateUserInterface);                             
                  });
             
             });
   //Update the buttons on the board to match our document
   
-  ap.on('play', function(){
-        
-        if(ap.audio.currentTime){
+   ap.on('play', function(){
+
+        //if(ap.audio.currentTime){		
             var data = {"time" : ap.audio.currentTime};
             console.log(data);
             syncDoc.set(data);
-        }
-  });
+			
+        //}
+  }); 
   
-  
+
+ 
   ap.on('pause', function(){
+//	  isPlaying = !isPlaying;
         var data = {"time" : ap.audio.currentTime};
         console.log(data);
         syncDoc.set(data);
@@ -87,7 +94,14 @@ $(function () {
   
   function updateUserInterface(data) {
           console.log(data);
-          ap.play(data["time"]);
+		  if(ap.play(data["time"]))
+		  {
+			  ap.pause(data["time"]);
+		  }
+		  else{
+			  ap.play(data["time"]);
+		  }
+
       }
   });
 
