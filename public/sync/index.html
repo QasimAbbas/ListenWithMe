@@ -2,18 +2,49 @@
 <html>
 <head>
     <title>ListenWithMe</title>
-    <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="index.css">
+    
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+    .container {
+        max-width: 32rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+    }
+    h1 {
+        font-size: 54px;
+        color: #333;
+        margin: 30px 0 10px;
+    }
+    h2 {
+        font-size: 22px;
+        color: #555;
+    }
+    h3 {
+        font-size: 24px;
+        color: #555;
+    }
+    hr {
+        display: block;
+        width: 7rem;
+        height: 1px;
+        margin: 2.5rem 0;
+        background-color: #eee;
+        border: 0;
+    }
+    a {
+        color: #08c;
+        text-decoration: none;
+    }
+    p {
+        font-size: 18px;
+    }
+    </style>
 </head>
 <body>
-  <header>
-    <a href="https://www.twilio.com/docs/api/sync/quickstart-js"
-       target="_blank">
-        Read the getting started guide
-        <i class="fa fa-fw fa-external-link"></i>
-    </a>
-  </header>
 
   <section>
     <h1>ListenWithMe</h1>
@@ -22,7 +53,10 @@
       Welcome! Initializing Sync...
     </div>
     
-    <div id="player"></div>
+    <div class="container">
+        <div id="player" class="aplayer"></div>
+    </div>
+    
 
     <p>Open this page in a few tabs to test!</p>
   </section>

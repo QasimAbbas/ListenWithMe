@@ -2,13 +2,21 @@ $(function () {
   var syncClient;
   
   var ap = new APlayer({
-       element: document.getElementById('player'),
-       music:{
-       title: 'A Scrubs Life',
-       author: 'Scrub',
-       url: 'nyan.mp3'
-       }
-   });
+                        element: document.getElementById('player'),
+                        narrow: false,
+                        autoplay: true,
+                        showlrc: false,
+                        mutex: false,
+                        theme: '#e6d0b2',
+                        preload: 'metadata',
+                        mode: 'circulation',
+                        music: {
+                        title: 'Preparation',
+                        author: 'Hans Zimmer/Richard Harvey',
+                        url: 'nyan.mp3',
+                        }
+                        });
+
   
   
   //We'll use message to tell the user what's happening
@@ -47,9 +55,8 @@ $(function () {
                  //Initialize game board UI to current state (if it exists)
                  var data = syncDoc.get();
                  
-                                                 
                  if(data){
-                                                 updateUserInterface(data);
+                     updateUserInterface(data);
                      }
                                                  
                  //Let's subscribe to changes on this document, so when something
@@ -61,13 +68,21 @@ $(function () {
             });
   //Update the buttons on the board to match our document
   
-  
   ap.on('play', function(){
-        var data = {"time" : ap.audio.currentTime};
-        //console.log(data);
-        syncDoc.set(data);
+        
+        if(ap.audio.currentTime){
+            var data = {"time" : ap.audio.currentTime};
+            console.log(data);
+            syncDoc.set(data);
+        }
   });
   
+  
+  ap.on('pause', function(){
+        var data = {"time" : ap.audio.currentTime};
+        console.log(data);
+        syncDoc.set(data);
+  });
   
   
   function updateUserInterface(data) {
